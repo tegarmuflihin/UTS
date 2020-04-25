@@ -1,0 +1,106 @@
+<html>
+<head><title>Form Input Mahasiswa</title>
+</style>
+</head>
+<body bgcolor=pink>
+    <center>
+    <h1>FORM INPUT DATA COVID 19</h1>
+    <form method="post" action="output.php">
+    <table border="0">
+    <tr>
+        <td>Nama Wilayah</td>
+        <td>:</td>
+        <td>
+        <select name="nama wilayah">
+            <option value="DKI Jakarta">DKI Jakarta</option>
+            <option value="Jawa barat">Jawa barat</option>
+            <option value="Bante">Bante</option>
+            <option value="Jawa tengah">Jawa tengah</option>
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td>jumlah positif</td>
+        <td>:</td>
+        <td><input type="text" jumlah positif="jumlah_positif" size=40></td>
+    </tr>
+    <tr>
+        <td>jumlah dirawat</td>
+        <td>:</td>
+        <td><input type="text" jumlah dirawat="jumlah_dirawat" size=40></td>
+    </tr>
+    <tr>
+        <td>jumlah sembuh</td>
+        <td>:</td>
+        <td><input type="text" jumlah sembuh="jumlah_sembuh" size=40></td>
+    </tr>
+    <tr>
+        <td>jumlah meninggal</td>
+        <td>:</td>
+        <td><input type="text" jumlah meninggal="jumlah_meninggal" size=40></td>
+    </tr>
+    <tr>
+        <td>nama operator</td>
+        <td>:</td>
+        <td><input type="text" nama operator="nama_operator" size=40></td>
+    </tr>
+    <tr>
+        <td>Nim mahasiswa</td>
+        <td>:</td>
+        <td><input type="text" Nim mahasiswa="nim_mahasiswa" size=40></td>
+    </tr>
+     <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><input type="submit" value="kirim"/></td>
+    </tr>
+    </table>
+    </form>
+    </center>
+</body>
+</html>
+        </form><br><br><br><br>
+        <center><h1>Data Pemantauan COVID19 Wilayah <?php echo $_GET['namaWilayah']; ?> <br>
+        <?php $dt = new DateTime('now', new DateTimezone('Asia/Jakarta')); ?>
+        Per <?php echo $dt->format("d-F-y H:i:s"); ?> <br>
+        <?php echo $_GET['nama']; ?> 
+        <?php echo $_GET['nim']; ?>
+        <table>
+            <tr>
+                <th>Positif</th>
+                <th>Dirawat</th>
+                <th>Sembuh</th>
+                <th>Meninggal</th>
+            </tr>
+            <tr>
+                <th><?php echo $_GET['jmlPositif']; ?></th>
+                <th><?php echo $_GET['jmlDirawat']; ?></th>
+                <th><?php echo $_GET['jmlSembuh']; ?></th>
+                <th><?php echo $_GET['jmlMeninggal']; ?></th>
+            </tr>
+        </table></h1></center>
+        <?php
+            if(isset($_GET['nama']))
+            {
+                $namaWilayah=$_GET['namaWilayah'];
+                $jmlPositif=$_GET['jmlPositif'];
+                $jmlDirawat=$_GET['jmlDirawat'];
+                $jmlSembuh=$_GET['jmlSembuh'];
+                $jmlMeninggal=$_GET['jmlMeninggal'];
+                $nama=$_GET['nama'];
+                $nim=$_GET['nim'];
+                $fp = fopen('data.txt', 'a');
+                fwrite($fp, $namaWilayah);
+                fwrite($fp, $jmlPositif);
+                fwrite($fp, $jmlDirawat);
+                fwrite($fp, $jmlSembuh);
+                fwrite($fp, $jmlMeninggal);
+                fwrite($fp, $nama);
+                fwrite($fp, $nim);
+                fclose($fp);
+            }
+        ?>
+    </table>
+    </body>
+
+</html>
